@@ -60,8 +60,13 @@ public class EditItemActivity extends AppCompatActivity {
     public void onSaveItem(View view) {
         EditText etTodoItem = (EditText) findViewById(R.id.etTodoItem);
         String itemText = etTodoItem.getText().toString();
-        items.set(itemPos, itemText);
-        itemsHelper.writeItems(items);
-        finish();
+        if (itemText.trim().isEmpty()) {
+            etTodoItem.setError("Item cannot be blank");
+            etTodoItem.setText(items.get(itemPos));
+        } else {
+            items.set(itemPos, itemText);
+            itemsHelper.writeItems(items);
+            finish();
+        }
     }
 }

@@ -65,10 +65,12 @@ public class MainActivity extends AppCompatActivity {
     public void onAddItem(View view) {
         EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
-        if (!itemText.isEmpty()) {
+        if (!itemText.trim().isEmpty()) {
             itemsAdapter.add(itemText);
             etNewItem.setText("");
             itemsHelper.writeItems(items);
+        } else {
+            etNewItem.setError("Item cannot be blank");
         }
     }
 
